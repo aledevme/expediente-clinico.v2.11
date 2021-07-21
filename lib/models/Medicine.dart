@@ -4,11 +4,7 @@ class Medicine {
   String product;
   String stock;
 
-  Medicine(
-      {required this.id,
-      required this.category,
-      required this.product,
-      required this.stock});
+  Medicine({this.id, this.category, this.product, this.stock});
 
   factory Medicine.fromJsonResponse(Map<String, dynamic> response) {
     return Medicine(

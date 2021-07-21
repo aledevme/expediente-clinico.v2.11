@@ -15,12 +15,12 @@ class EditMedicineScreen extends StatefulWidget {
 }
 
 class _EditMedicineScreenState extends State<EditMedicineScreen> {
-  late AppProvider provider;
-  late String category;
-  late String product;
-  late String stock;
+  AppProvider provider;
+  String category;
+  String product;
+  String stock;
   MedicineService medicineService = MedicineService();
-  late Medicine medicine;
+  Medicine medicine;
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppProvider>(context);

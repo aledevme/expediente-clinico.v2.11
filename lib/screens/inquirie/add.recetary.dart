@@ -16,9 +16,9 @@ class AddRecetaryScreen extends StatefulWidget {
 }
 
 class _AddRecetaryScreenState extends State<AddRecetaryScreen> {
-  late Recetary recetary;
-  late ProviderRecetary providerRecetary;
-  late Medicine selectedMedicine;
+   Recetary recetary;
+   ProviderRecetary providerRecetary;
+   Medicine selectedMedicine;
   MedicineService medicineService = MedicineService();
   AppProvider appProvider = AppProvider();
 

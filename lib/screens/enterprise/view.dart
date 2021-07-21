@@ -14,7 +14,7 @@ class ViewEnterprisesScreen extends StatefulWidget {
 
 class _ViewEnterprisesScreenState extends State<ViewEnterprisesScreen> {
   EnterpriseService service = EnterpriseService();
-  late AppProvider provider;
+   AppProvider provider;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _ViewEnterprisesScreenState extends State<ViewEnterprisesScreen> {
                 builder: (BuildContext context,
                     AsyncSnapshot<List<Enterprise>> snapshot) {
                   if (snapshot.hasData) {
-                    return listOfEnterprise(snapshot.data!);
+                    return listOfEnterprise(snapshot.data);
                   } else {
                     return Center(
                       child: CircularProgressIndicator(),

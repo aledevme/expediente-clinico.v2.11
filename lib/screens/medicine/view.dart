@@ -15,8 +15,8 @@ class ViewMedicineScreen extends StatefulWidget {
 
 class _ViewMedicineScreenState extends State<ViewMedicineScreen> {
   MedicineService medicineService = MedicineService();
-  late AppProvider provider;
-  late Enterprise enterprise;
+  AppProvider provider;
+  Enterprise enterprise;
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppProvider>(context);

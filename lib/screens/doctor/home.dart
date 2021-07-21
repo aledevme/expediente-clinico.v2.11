@@ -14,8 +14,8 @@ class HomeDoctor extends StatefulWidget {
 }
 
 class _HomeDoctorState extends State<HomeDoctor> {
-  late AppProvider provider;
-  late ProviderOption providerOption;
+  AppProvider provider;
+  ProviderOption providerOption;
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppProvider>(context);

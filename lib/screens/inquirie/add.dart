@@ -26,26 +26,26 @@ class AddInquirieScreen extends StatefulWidget {
 class _AddInquirieScreenState extends State<AddInquirieScreen> {
   List<String> items = ['Servicio 1', 'Servicio 2', 'Servicio 3', 'Servicio 4'];
 
-  late Expedient selectedExpedient;
-  late ProviderTreatment providerTreatment;
-  late ProviderPatient providerPatient;
-  late ProviderRecetary providerRecetary;
-  late ProviderInquirie providerInquirie;
-  late Inquirie inquirie;
+  Expedient selectedExpedient;
+  ProviderTreatment providerTreatment;
+  ProviderPatient providerPatient;
+  ProviderRecetary providerRecetary;
+  ProviderInquirie providerInquirie;
+  Inquirie inquirie;
   InquirieService inquirieService = InquirieService();
   List<Service> services = [];
   List<Expedient> patients = [];
-  late Service selectedService;
+  Service selectedService;
   double extras = 0;
   double subTotal = 0;
   double deposit = 0;
   double cuota = 0;
   double prime = 0;
   int sessions = 0;
-  late String description;
+  String description;
   ServicesService servicesService = ServicesService();
   bool isLoadingServices = true;
-  late AppProvider appProvider;
+  AppProvider appProvider;
   bool isLoading = false;
   ExpedientService expedientService = ExpedientService();
   List<Map<String, dynamic>> recetary = [];
@@ -53,8 +53,8 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
   int _radioValue = 0;
   int _radioTypeInquirie = 0;
   bool isInquirieCreated = true;
-  late DateTime _selectedDate;
-  late String dateOfDate;
+  DateTime _selectedDate;
+  String dateOfDate;
   TextEditingController dateInputController = TextEditingController();
 
   @override
@@ -460,9 +460,9 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
                   color: Colors.grey[700]),
             ),
             SizedBox(height: 15),
-            Text('Malestar: ' + selectedExpedient.badFor!),
+            Text('Malestar: ' + selectedExpedient.badFor),
             SizedBox(height: 15),
-            Text('Motivo: ' + selectedExpedient.whyVisiting!),
+            Text('Motivo: ' + selectedExpedient.whyVisiting),
             SizedBox(height: 15),
             Text('${selectedExpedient.dateBirthday}')
           ],
@@ -545,7 +545,7 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text(expedient.whyVisiting!), getAge(expedient)],
+              children: [Text(expedient.whyVisiting), getAge(expedient)],
             )
           ],
         ),
@@ -589,7 +589,7 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
       sum += providerTreatment.treatments[i].price;
     }
 
-    double totalInquirie = sum + double.tryParse(selectedService.price)!;
+    double totalInquirie = sum + double.tryParse(selectedService.price);
 
     setState(() {
       extras = sum;
@@ -600,7 +600,7 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
   }
 
   void addPatient() async {
-    double totalInquirie = extras + double.tryParse(selectedService.price)!;
+    double totalInquirie = extras + double.tryParse(selectedService.price);
     if (selectedService == null) {
       showDialog(
           context: context,
@@ -641,11 +641,11 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
         "status": _radioTypeInquirie == 0 ? 'No abonado' : 'Pendiente',
         "session": sessions, //sesiones
         "balance": deposit == 0
-            ? extras + double.tryParse(selectedService.price)!
-            : (extras + double.tryParse(selectedService.price)!) - deposit,
+            ? extras + double.tryParse(selectedService.price)
+            : (extras + double.tryParse(selectedService.price)) - deposit,
         "clinic": appProvider.clinic.id,
         "methodPayment": _radioValue == 0 ? 'Tarjeta' : 'Efectivo',
-        "totalService": extras + double.tryParse(selectedService.price)!
+        "totalService": extras + double.tryParse(selectedService.price)
       };
       var res = await inquirieService.addInquirie(body);
 

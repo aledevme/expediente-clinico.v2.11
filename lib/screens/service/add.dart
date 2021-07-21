@@ -15,12 +15,12 @@ class AddServiceScreen extends StatefulWidget {
 
 class _AddServiceScreenState extends State<AddServiceScreen> {
   ServicesService servicesService = ServicesService();
-  late AppProvider provider;
+  AppProvider provider;
 
-  late String service;
-  late String treatment;
-  late String price;
-  late String code;
+  String service;
+  String treatment;
+  String price;
+  String code;
 
   @override
   Widget build(BuildContext context) {

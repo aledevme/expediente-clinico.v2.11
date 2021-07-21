@@ -12,7 +12,7 @@ class HomeEnterpriseScreen extends StatefulWidget {
 }
 
 class _HomeEnterpriseScreenState extends State<HomeEnterpriseScreen> {
-  late ProviderOption providerOption;
+  ProviderOption providerOption;
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppProvider>(context);
@@ -92,7 +92,7 @@ class _HomeEnterpriseScreenState extends State<HomeEnterpriseScreen> {
             decoration: BoxDecoration(
                 color: Color(0xff2667ff),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.grey[400]!)),
+                border: Border.all(color: Colors.grey[400])),
             margin: EdgeInsets.all(5.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

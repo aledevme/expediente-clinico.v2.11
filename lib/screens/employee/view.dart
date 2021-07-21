@@ -17,9 +17,9 @@ class _ViewEmployeesScreenState extends State<ViewEmployeesScreen> {
   EnterpriseService service = EnterpriseService();
   StaffService staffService = StaffService();
   bool isLoadingEnterprises = true;
-  late AppProvider provider;
+  AppProvider provider;
   List<Enterprise> enterprises = [];
-  late Enterprise selectedEnterprise;
+  Enterprise selectedEnterprise;
   @override
   void initState() {
     super.initState();

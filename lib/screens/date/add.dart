@@ -31,17 +31,17 @@ class _AddDateScreenState extends State<AddDateScreen> {
   FirebaseUtil firebaseUtil = FirebaseUtil();
   StaffService staffService = StaffService();
   DateService dateService = DateService();
-  late DateTime _selectedDate;
-  late Staff selectedStaff;
+  DateTime _selectedDate;
+  Staff selectedStaff;
   List<String> items = ['Servicio 1', 'Servicio 2', 'Servicio 3', 'Servicio 4'];
-  late String selectedService;
-  late Expedient selectedExpedient;
+  String selectedService;
+  Expedient selectedExpedient;
 
   bool isLoadingDoctors = true;
 
-  late TimeOfDay picked;
-  late String hour;
-  late String dateOfDate;
+  TimeOfDay picked;
+  String hour;
+  String dateOfDate;
 
   bool isLoading = true;
   List<Expedient> patients = [];
@@ -51,7 +51,7 @@ class _AddDateScreenState extends State<AddDateScreen> {
   List<Expedient> filteredPatients = [];
   List<Staff> staffList = [];
 
-  late AppProvider appProvider;
+  AppProvider appProvider;
 
   @override
   void initState() {
@@ -323,9 +323,9 @@ class _AddDateScreenState extends State<AddDateScreen> {
                   color: Colors.grey[700]),
             ),
             SizedBox(height: 15),
-            Text('Malestar: ' + selectedExpedient.badFor!),
+            Text('Malestar: ' + selectedExpedient.badFor),
             SizedBox(height: 15),
-            Text('Motivo: ' + selectedExpedient.whyVisiting!),
+            Text('Motivo: ' + selectedExpedient.whyVisiting),
             SizedBox(height: 15),
             getAge(selectedExpedient)
           ],
@@ -411,7 +411,7 @@ class _AddDateScreenState extends State<AddDateScreen> {
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text(expedient.whyVisiting!), Text('18 años')],
+              children: [Text(expedient.whyVisiting), Text('18 años')],
             )
           ],
         ),

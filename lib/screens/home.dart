@@ -18,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  late AppProvider provider;
-  late ProviderOption providerOption;
+  AppProvider provider;
+  ProviderOption providerOption;
 
   @override
   Widget build(BuildContext context) {

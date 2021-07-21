@@ -20,22 +20,22 @@ class AddEmployeeScreen extends StatefulWidget {
 class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
   EnterpriseService service = EnterpriseService();
   StaffService staffService = StaffService();
-  late AppProvider provider;
+  AppProvider provider;
 
   bool isLoadingEnterprises = true;
   List<Enterprise> enterprises = [];
 
   bool hasPermissionToViewAll = false;
 
-  late String name;
-  late String lastname;
-  late String email;
-  late String password;
-  late String dui;
-  late String location;
-  late String selectedRole;
-  late Enterprise selectedEnterprise;
-  late Clinic selectedClinic;
+  String name;
+  String lastname;
+  String email;
+  String password;
+  String dui;
+  String location;
+  String selectedRole;
+  Enterprise selectedEnterprise;
+  Clinic selectedClinic;
 
   List<String> roles = ['Doctor', 'Asistente', 'Secretaria'];
 

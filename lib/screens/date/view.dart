@@ -12,7 +12,7 @@ class ViewDatesScreen extends StatefulWidget {
 }
 
 class _ViewDatesScreenState extends State<ViewDatesScreen> {
-  late AppProvider appProvider;
+  AppProvider appProvider;
   DateService dateService = DateService();
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _ViewDatesScreenState extends State<ViewDatesScreen> {
                           return ListView.builder(
                             itemCount: (snapshot.data as List<Date>).length,
                             itemBuilder: (BuildContext context, int index) {
-                              Date date = snapshot.data![index];
+                              Date date = snapshot.data[index];
                               return Container(
                                 padding: EdgeInsets.all(15),
                                 decoration:

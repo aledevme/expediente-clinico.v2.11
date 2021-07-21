@@ -15,10 +15,10 @@ class PermissionsEmployeeScreen extends StatefulWidget {
 }
 
 class _PermissionsEmployeeScreenState extends State<PermissionsEmployeeScreen> {
-  late ProviderOption providerOption;
+  ProviderOption providerOption;
   List<Map<String, dynamic>> selectedOptions = [];
   StaffService staffService = StaffService();
-  late Staff staff;
+  Staff staff;
 
   @override
   Widget build(BuildContext context) {

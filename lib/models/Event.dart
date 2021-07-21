@@ -3,5 +3,5 @@ class Event {
   String event;
   DateTime dateTime;
 
-  Event({required this.id, required this.event, required this.dateTime});
+  Event({this.id, this.event, this.dateTime});
 }

@@ -7,12 +7,12 @@ class Service {
   String clinic;
 
   Service(
-      {required this.id,
-      required this.code,
-      required this.typeOfService,
-      required this.typeOfTreatment,
-      required this.price,
-      required this.clinic});
+      {this.id,
+      this.code,
+      this.typeOfService,
+      this.typeOfTreatment,
+      this.price,
+      this.clinic});
 
   factory Service.fromJsonResponse(Map<String, dynamic> response) {
     return Service(

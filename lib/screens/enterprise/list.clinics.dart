@@ -8,13 +8,13 @@ import 'package:provider/provider.dart';
 class ListOfClinics extends StatefulWidget {
   final EnterpriseService enterpriseService;
   final Enterprise enteprise;
-  ListOfClinics({required this.enterpriseService, required this.enteprise});
+  ListOfClinics({this.enterpriseService, this.enteprise});
   @override
   _ListOfClinicsState createState() => _ListOfClinicsState();
 }
 
 class _ListOfClinicsState extends State<ListOfClinics> {
-  AppProvider? appProvider;
+  AppProvider appProvider;
   @override
   Widget build(BuildContext context) {
     appProvider = Provider.of<AppProvider>(context);
@@ -29,9 +29,9 @@ class _ListOfClinicsState extends State<ListOfClinics> {
               itemBuilder: (BuildContext context, int index) {
                 Clinic clinic = snapshot.data[index];
                 return ListTile(
-                    onTap: () => actionCheck(appProvider!.clinic),
+                    onTap: () => actionCheck(appProvider.clinic),
                     title: Text(clinic.name),
-                    trailing: showCheck(appProvider!.clinic));
+                    trailing: showCheck(appProvider.clinic));
               },
             );
           } else {
@@ -42,13 +42,13 @@ class _ListOfClinicsState extends State<ListOfClinics> {
         });
   }
 
-  void actionCheck(Clinic? clinic) {
+  void actionCheck(Clinic clinic) {
     if (clinic != null) {
-      appProvider!.clinic = clinic;
+      appProvider.clinic = clinic;
     }
   }
 
-  Widget showCheck(Clinic? clinic) {
+  Widget showCheck(Clinic clinic) {
     if (clinic == null) {
       return Container();
     } else {

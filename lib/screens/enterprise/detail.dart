@@ -18,12 +18,12 @@ class DetailEnterprise extends StatefulWidget {
 class _DetailEnterpriseState extends State<DetailEnterprise>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
-  late TabController _controller;
+  TabController _controller;
 
-  late String name;
-  late String direction;
+  String name;
+  String direction;
 
-  late Enterprise enterprise;
+  Enterprise enterprise;
 
   ClinicService clinicService = ClinicService();
   EnterpriseService enterpriseService = EnterpriseService();

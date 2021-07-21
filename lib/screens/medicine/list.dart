@@ -9,10 +9,7 @@ class ListOfMedicine extends StatefulWidget {
   final String enterpriseId;
   final String role;
   ListOfMedicine(
-      {required this.role,
-      required this.enterpriseId,
-      required this.medicineService,
-      required this.idClinic});
+      {this.role, this.enterpriseId, this.medicineService, this.idClinic});
   @override
   _ListOfMedicineState createState() => _ListOfMedicineState();
 }

@@ -15,12 +15,12 @@ class ViewInquiriesScreen extends StatefulWidget {
 }
 
 class _ViewInquiriesScreenState extends State<ViewInquiriesScreen> {
-  late ProviderInquirie providerInquirie;
+  ProviderInquirie providerInquirie;
   InquirieService inquirieService = InquirieService();
   List<Inquirie> inquiries = [];
   List<Inquirie> filteredInquiries = [];
   bool isLoading = true;
-  late AppProvider provider;
+  AppProvider provider;
 
   @override
   void initState() {
@@ -143,7 +143,7 @@ class _ViewInquiriesScreenState extends State<ViewInquiriesScreen> {
           ),
           Text('Expediente general.'),
           SizedBox(height: 10),
-          Text(inquirie.expedient.badFor!),
+          Text(inquirie.expedient.badFor),
           SizedBox(height: 10),
           Text('${inquirie.service}:'),
           SizedBox(height: 10),

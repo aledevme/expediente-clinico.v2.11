@@ -14,12 +14,12 @@ class AddEnterprise extends StatefulWidget {
 }
 
 class _AddEnterpriseState extends State<AddEnterprise> {
-  late AppProvider provider;
+  AppProvider provider;
   EnterpriseService service = EnterpriseService();
 
-  late String name;
-  late String socialReason;
-  late String direction;
+  String name;
+  String socialReason;
+  String direction;
 
   @override
   Widget build(BuildContext context) {

@@ -15,7 +15,7 @@ class ViewPatientsScreen extends StatefulWidget {
 }
 
 class _ViewPatientsScreenState extends State<ViewPatientsScreen> {
-  late ProviderPatient providerPatient;
+  ProviderPatient providerPatient;
   List<Expedient> filteredPatients = [];
   ExpedientService expedientService = ExpedientService();
   bool isLoading = true;
@@ -163,7 +163,7 @@ class _ViewPatientsScreenState extends State<ViewPatientsScreen> {
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(expedient.whyVisiting!), getAge(expedient)],
+                children: [Text(expedient.whyVisiting), getAge(expedient)],
               )
             ],
           ),

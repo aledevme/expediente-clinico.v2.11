@@ -14,10 +14,10 @@ class AddMedicineScreen extends StatefulWidget {
 }
 
 class _AddMedicineScreenState extends State<AddMedicineScreen> {
-  late AppProvider provider;
-  late String category;
-  late String product;
-  late String stock;
+  AppProvider provider;
+  String category;
+  String product;
+  String stock;
   MedicineService medicineService = MedicineService();
 
   @override

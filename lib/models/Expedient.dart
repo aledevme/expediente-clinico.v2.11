@@ -6,46 +6,46 @@ class Expedient {
   String dateBirthday;
 
   //if is
-  bool? isAChild;
-  String? fatherName;
-  String? motherName;
-  String? tutorName;
-  String? school;
+  bool isAChild;
+  String fatherName;
+  String motherName;
+  String tutorName;
+  String school;
 
-  Map<String, dynamic>? child;
+  Map<String, dynamic> child;
 
-  String? work;
-  String? email;
-  List<dynamic>? cellphones;
+  String work;
+  String email;
+  List<dynamic> cellphones;
 
-  String? whyVisiting;
-  String? badFor;
-  String? medicalLastArchive; //clinic
-  String? odontologyLastArchive; //odontologic clinic
-  String? lastClinicVisiting;
-  String? others;
+  String whyVisiting;
+  String badFor;
+  String medicalLastArchive; //clinic
+  String odontologyLastArchive; //odontologic clinic
+  String lastClinicVisiting;
+  String others;
 
   String clinic;
   List<dynamic> history;
 
   Expedient(
-      {required this.id,
-      required this.name,
-      required this.lastname,
-      required this.direction,
-      required this.dateBirthday,
-      required this.work,
-      required this.email,
-      required this.history,
-      required this.cellphones,
-      required this.whyVisiting,
-      required this.badFor,
-      required this.medicalLastArchive, //clinic
-      required this.odontologyLastArchive,
-      required this.child,
-      required this.lastClinicVisiting,
-      required this.clinic,
-      required this.isAChild});
+      {this.id,
+      this.name,
+      this.lastname,
+      this.direction,
+      this.dateBirthday,
+      this.work,
+      this.email,
+      this.history,
+      this.cellphones,
+      this.whyVisiting,
+      this.badFor,
+      this.medicalLastArchive, //clinic
+      this.odontologyLastArchive,
+      this.child,
+      this.lastClinicVisiting,
+      this.clinic,
+      this.isAChild});
 
   factory Expedient.fromJsonResponse(Map<String, dynamic> response) {
     return Expedient(

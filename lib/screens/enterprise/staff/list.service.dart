@@ -12,16 +12,13 @@ class ListOfServices extends StatefulWidget {
   String enterpriseId;
   String role;
   ListOfServices(
-      {required this.role,
-      required this.servicesService,
-      required this.enterprise,
-      required this.enterpriseId});
+      {this.role, this.servicesService, this.enterprise, this.enterpriseId});
   @override
   _ListOfServicesState createState() => _ListOfServicesState();
 }
 
 class _ListOfServicesState extends State<ListOfServices> {
-  late AppProvider provider;
+  AppProvider provider;
 
   ServicesService servicesService = ServicesService();
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomCheckBox extends StatelessWidget {
   final bool selected;
   final void Function() onChange;
-  CustomCheckBox({this.selected = false, required this.onChange});
+  CustomCheckBox({this.selected = false, this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class CustomCheckBox extends StatelessWidget {
         width: 17,
         decoration: BoxDecoration(
             color: selected ? Colors.blue[800] : Colors.white,
-            border: Border.all(color: Colors.blue[700]!),
+            border: Border.all(color: Colors.blue[700]),
             borderRadius: BorderRadius.circular(5)),
         child: selected
             ? Icon(

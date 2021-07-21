@@ -12,13 +12,13 @@ class AddOwnerScreen extends StatefulWidget {
 }
 
 class _AddOwnerScreenState extends State<AddOwnerScreen> {
-  late String name;
-  late String lastname;
-  late String email;
-  late String password;
+  String name;
+  String lastname;
+  String email;
+  String password;
 
   AuthService authService = AuthService();
-  late AppProvider appProvider;
+  AppProvider appProvider;
 
   @override
   Widget build(BuildContext context) {

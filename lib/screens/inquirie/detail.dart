@@ -23,12 +23,12 @@ class DetailInquirie extends StatefulWidget {
 class _DetailInquirieState extends State<DetailInquirie>
     with SingleTickerProviderStateMixin {
   //tabs config
-  late int currentIndex = 0;
-  late Service selectedService;
-  late TabController _controller;
-  late List<Service> services;
+  int currentIndex = 0;
+  Service selectedService;
+  TabController _controller;
+  List<Service> services;
 
-  late Inquirie inquirie;
+  Inquirie inquirie;
   bool isLoadinServices = true;
 
   FirebaseUtil firebaseUtil = FirebaseUtil();
@@ -50,10 +50,10 @@ class _DetailInquirieState extends State<DetailInquirie>
     super.initState();
   }
 
-  late String title;
-  late String money;
+  String title;
+  String money;
 
-  late AppProvider provider;
+  AppProvider provider;
 
   @override
   Widget build(BuildContext context) {
@@ -259,9 +259,9 @@ class _DetailInquirieState extends State<DetailInquirie>
                   color: Colors.grey[700]),
             ),
             SizedBox(height: 15),
-            Text('Malestar: ' + selectedExpedient.badFor!),
+            Text('Malestar: ' + selectedExpedient.badFor),
             SizedBox(height: 15),
-            Text('Motivo: ' + selectedExpedient.whyVisiting!),
+            Text('Motivo: ' + selectedExpedient.whyVisiting),
             SizedBox(height: 15),
             Text('${selectedExpedient.dateBirthday}')
           ],

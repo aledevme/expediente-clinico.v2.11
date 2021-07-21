@@ -13,16 +13,16 @@ class Staff {
   List<Option> options;
 
   Staff(
-      {required this.id,
-      required this.name,
-      required this.lastname,
-      required this.email,
-      required this.direction,
-      required this.role,
-      required this.clinic,
-      required this.enterprise,
-      required this.hasPermissionViewClinics,
-      required this.options});
+      {this.id,
+      this.name,
+      this.lastname,
+      this.email,
+      this.direction,
+      this.role,
+      this.clinic,
+      this.enterprise,
+      this.hasPermissionViewClinics,
+      this.options});
 
   factory Staff.fromJsonResponse(Map<String, dynamic> response) {
     return Staff(

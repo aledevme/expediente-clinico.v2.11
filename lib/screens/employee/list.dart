@@ -7,13 +7,13 @@ import 'package:provider/provider.dart';
 class ListOfStaff extends StatefulWidget {
   final String enterpriseId;
   final StaffService staffService;
-  ListOfStaff({required this.enterpriseId, required this.staffService});
+  ListOfStaff({this.enterpriseId, this.staffService});
   @override
   _ListOfStaffState createState() => _ListOfStaffState();
 }
 
 class _ListOfStaffState extends State<ListOfStaff> {
-  late AppProvider provider;
+  AppProvider provider;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

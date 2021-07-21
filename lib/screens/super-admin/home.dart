@@ -12,7 +12,7 @@ class SuperAdminScreen extends StatefulWidget {
 }
 
 class _SuperAdminScreenState extends State<SuperAdminScreen> {
-  late AppProvider provider;
+  AppProvider provider;
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppProvider>(context);

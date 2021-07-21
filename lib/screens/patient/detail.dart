@@ -21,13 +21,13 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
     with SingleTickerProviderStateMixin {
   //tabs config
   int currentIndex = 0;
-  late TabController _controller;
-  late Expedient expedient;
+   TabController _controller;
+   Expedient expedient;
 
   TextEditingController dateInputController = TextEditingController();
   TextEditingController messageController = TextEditingController();
   ExpedientService expedientService = ExpedientService();
-  late AppProvider appProvider;
+   AppProvider appProvider;
   BillService billService = BillService();
 
   @override
@@ -44,9 +44,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
   }
 
   //screen patient detail state
-  late DateTime _selectedDate;
-  late String dateOfDate;
-  late String message;
+   DateTime _selectedDate;
+   String dateOfDate;
+   String message;
   bool loadingMessage = false;
 
   @override
@@ -173,7 +173,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
                 ],
               ),
             ),
-            if (expedient.isAChild!) isChildInfo(expedient) else Container(),
+            if (expedient.isAChild) isChildInfo(expedient) else Container(),
             SizedBox(height: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,19 +184,19 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
                 SizedBox(height: 5),
                 Text('Razon de visita'),
                 SizedBox(height: 5),
-                Text(expedient.whyVisiting!),
+                Text(expedient.whyVisiting),
                 SizedBox(height: 5),
                 Text('Malestar'),
                 SizedBox(height: 5),
-                Text(expedient.badFor!),
+                Text(expedient.badFor),
                 SizedBox(height: 5),
                 Text('Ultima clinica visitada'),
                 SizedBox(height: 5),
-                Text(expedient.lastClinicVisiting!),
+                Text(expedient.lastClinicVisiting),
                 SizedBox(height: 5),
                 Text('Ultima clinica odontologica visitada'),
                 SizedBox(height: 5),
-                Text(expedient.odontologyLastArchive!)
+                Text(expedient.odontologyLastArchive)
               ],
             )
           ],
@@ -305,12 +305,12 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
             SizedBox(height: 10),
             Text('Colegio'),
             SizedBox(height: 10),
-            Text(expedient.child!['school']),
+            Text(expedient.child['school']),
             SizedBox(height: 10),
             Text('Padres de familia'),
             SizedBox(height: 10),
             Text(
-                'Padre: ${expedient.child!['fatherName']} Madre:${expedient.child!['motherName']}')
+                'Padre: ${expedient.child['fatherName']} Madre:${expedient.child['motherName']}')
           ],
         ),
       );

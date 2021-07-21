@@ -7,11 +7,11 @@ class AppProvider with ChangeNotifier {
   String _email = "";
   String _role = "";
   String _fullName = "";
-  Clinic? _clinic;
+  Clinic _clinic;
   String _homeRoute = "";
   String _enterpriseOwnerId = "";
   String _enterpriseId = "";
-  late Enterprise _enterprise;
+  Enterprise _enterprise;
 
   set id(String value) {
     _userId = value;
@@ -46,7 +46,7 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Clinic get clinic => _clinic!;
+  Clinic get clinic => _clinic;
 
   set homeRoute(String route) {
     _homeRoute = route;

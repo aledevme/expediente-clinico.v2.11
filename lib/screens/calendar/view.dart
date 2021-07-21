@@ -16,9 +16,9 @@ class CalendarForDoctorScreen extends StatefulWidget {
 }
 
 class _CalendarForDoctorScreenState extends State<CalendarForDoctorScreen> {
-  late AppProvider appProvider;
+  AppProvider appProvider;
   DateTime _focusedDay = DateTime.now();
-  late DateTime _selectedDay;
+  DateTime _selectedDay;
 
   List<Date> dates = [];
   List<Date> selectedEvents = [];
@@ -27,7 +27,7 @@ class _CalendarForDoctorScreenState extends State<CalendarForDoctorScreen> {
 
   bool isLoadingDoctors = true;
 
-  late Staff selectedStaff;
+  Staff selectedStaff;
 
   List<Staff> staffList = [];
 

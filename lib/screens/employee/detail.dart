@@ -12,7 +12,7 @@ class DetailEmployeeScreen extends StatefulWidget {
 }
 
 class _DetailEmployeeScreenState extends State<DetailEmployeeScreen> {
-  late ProviderOption providerOption;
+   ProviderOption providerOption;
   StaffService service = StaffService();
   @override
   Widget build(BuildContext context) {

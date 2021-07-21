@@ -18,8 +18,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  late AppProvider provider;
-  late ProviderOption providerOption;
+  AppProvider provider;
+  ProviderOption providerOption;
   AuthService service = AuthService();
   AppPreferences preferences = AppPreferences();
   bool isLoading = false;

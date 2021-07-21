@@ -15,12 +15,12 @@ class AddPatientScreen extends StatefulWidget {
 
 class _AddPatientScreenState extends State<AddPatientScreen> {
   int age = 0;
-  late DateTime birthDayDate;
+  DateTime birthDayDate;
   bool isChild = false;
-  late AppProvider appProvider;
+  AppProvider appProvider;
   TextEditingController birthDateController = TextEditingController();
-  late ProviderPatient providerPatient;
-  late Expedient expedient;
+  ProviderPatient providerPatient;
+  Expedient expedient;
   ExpedientService service = ExpedientService();
 
   @override

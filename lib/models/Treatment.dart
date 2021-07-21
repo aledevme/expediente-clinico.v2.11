@@ -3,10 +3,7 @@ class Treatment {
   double price;
   String description;
 
-  Treatment(
-      {required this.nameTreatment,
-      required this.price,
-      required this.description});
+  Treatment({this.nameTreatment, this.price, this.description});
   factory Treatment.fromJsonResponse(Map<String, dynamic> response) {
     return Treatment(
         nameTreatment: response['nameTreatment'],

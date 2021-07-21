@@ -7,10 +7,7 @@ class CustomGridList extends StatelessWidget {
   final List<Widget> builderChildren;
 
   CustomGridList(
-      {required this.context,
-      required this.itemHeight,
-      required this.itemWidth,
-      required this.builderChildren});
+      {this.context, this.itemHeight, this.itemWidth, this.builderChildren});
 
   @override
   Widget build(BuildContext context) {

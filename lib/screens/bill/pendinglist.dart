@@ -22,13 +22,13 @@ class PendingListInquiries extends StatefulWidget {
 class _PendingListInquiriesState extends State<PendingListInquiries>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
-  late TabController _controller;
-  late Inquirie selectedInquirie;
+  TabController _controller;
+  Inquirie selectedInquirie;
 
   BillService billService = BillService();
 
-  late ProviderInquirie providerInquirie;
-  late AppProvider appProvider;
+  ProviderInquirie providerInquirie;
+  AppProvider appProvider;
 
   InquirieService inquirieService = InquirieService();
 
@@ -82,7 +82,7 @@ class _PendingListInquiriesState extends State<PendingListInquiries>
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
             //return Container();
-            return listOfBills(snapshot.data! as List<Bill>);
+            return listOfBills(snapshot.data as List<Bill>);
           } else {
             return Center(
               child: CircularProgressIndicator(),

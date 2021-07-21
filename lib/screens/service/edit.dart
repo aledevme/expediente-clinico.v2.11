@@ -16,11 +16,11 @@ class EditServiceScreen extends StatefulWidget {
 
 class _EditServiceScreenState extends State<EditServiceScreen> {
   ServicesService servicesService = ServicesService();
-  late AppProvider provider;
-  late Service serviceModel;
-  late String service;
-  late String treatment;
-  late String price;
+  AppProvider provider;
+  Service serviceModel;
+  String service;
+  String treatment;
+  String price;
   @override
   Widget build(BuildContext context) {
     serviceModel = ModalRoute.of(context)?.settings.arguments as Service;

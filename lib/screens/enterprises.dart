@@ -38,11 +38,11 @@ class _SelectEntepriseState extends State<SelectEnteprise> {
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           onTap: () =>
-                              appProvider.enterprise = snapshot.data![index],
-                          title: Text(snapshot.data![index].name),
-                          subtitle: Text(snapshot.data![index].socialReason),
+                              appProvider.enterprise = snapshot.data[index],
+                          title: Text(snapshot.data[index].name),
+                          subtitle: Text(snapshot.data[index].socialReason),
                           trailing: appProvider.enterprise.id ==
-                                  snapshot.data![index].id
+                                  snapshot.data[index].id
                               ? Icon(Icons.check)
                               : null,
                         );

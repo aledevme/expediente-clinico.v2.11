@@ -1,14 +1,10 @@
 class Recetary {
-  String? id;
-  String? medicine;
-  String? count;
-  String? indication;
+  String id;
+  String medicine;
+  String count;
+  String indication;
 
-  Recetary(
-      {required this.id,
-      required this.medicine,
-      required this.count,
-      required this.indication});
+  Recetary({this.id, this.medicine, this.count, this.indication});
 
   factory Recetary.fromJsonResponse(Map<String, dynamic> response) {
     return Recetary(

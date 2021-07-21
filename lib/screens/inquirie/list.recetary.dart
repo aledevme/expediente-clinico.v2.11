@@ -10,7 +10,7 @@ class ListRecetaryScreen extends StatefulWidget {
 }
 
 class _ListRecetaryScreenState extends State<ListRecetaryScreen> {
-  late ProviderRecetary providerRecetary;
+   ProviderRecetary providerRecetary;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _ListRecetaryScreenState extends State<ListRecetaryScreen> {
                     title: Text(providerRecetary.recetaries[index].medicine ??
                         'Sin medicina'),
                     subtitle:
-                        Text(providerRecetary.recetaries[index].indication!),
+                        Text(providerRecetary.recetaries[index].indication),
                   );
                 },
               ),

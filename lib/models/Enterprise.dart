@@ -9,12 +9,12 @@ class Enterprise {
   List<Clinic> clinics;
 
   Enterprise(
-      {required this.id,
-      required this.name,
-      required this.socialReason,
-      required this.direction,
-      required this.doctorId,
-      required this.clinics});
+      {this.id,
+      this.name,
+      this.socialReason,
+      this.direction,
+      this.doctorId,
+      this.clinics});
 
   factory Enterprise.fromJsonResponse(Map<String, dynamic> response) {
     return Enterprise(

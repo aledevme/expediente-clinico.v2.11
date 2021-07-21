@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
   final String titleButton;
 
-  CustomButton({this.onPressed, required this.titleButton});
+  CustomButton({this.onPressed, this.titleButton});
 
   @override
   Widget build(BuildContext context) {

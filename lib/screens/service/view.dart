@@ -13,7 +13,7 @@ class ViewServicesScreen extends StatefulWidget {
 
 class _ViewServicesScreenState extends State<ViewServicesScreen> {
   ServicesService servicesService = ServicesService();
-  late Enterprise enterprise;
+  Enterprise enterprise;
   @override
   Widget build(BuildContext context) {
     var appProvider = Provider.of<AppProvider>(context, listen: false);

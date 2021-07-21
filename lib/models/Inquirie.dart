@@ -7,7 +7,7 @@ class Inquirie {
   dynamic baseprice;
   List<dynamic> treatments;
   List<dynamic> recetaries;
-  late String clinic;
+  String clinic;
   String status;
   String type;
   dynamic totalService;
@@ -18,19 +18,19 @@ class Inquirie {
   List<dynamic> history;
 
   Inquirie(
-      {required this.id,
-      required this.expedient,
-      required this.service,
-      required this.treatments,
-      required this.status,
-      required this.recetaries,
-      required this.type,
-      required this.baseprice,
-      required this.totalService,
-      required this.balance,
-      required this.quota,
-      required this.history,
-      required this.session});
+      {this.id,
+      this.expedient,
+      this.service,
+      this.treatments,
+      this.status,
+      this.recetaries,
+      this.type,
+      this.baseprice,
+      this.totalService,
+      this.balance,
+      this.quota,
+      this.history,
+      this.session});
 
   factory Inquirie.fromJsonResponse(Map<String, dynamic> response) {
     return Inquirie(

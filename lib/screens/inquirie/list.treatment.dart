@@ -13,7 +13,7 @@ class ViewTreatMentsScreen extends StatefulWidget {
 }
 
 class _ViewTreatMentsScreenState extends State<ViewTreatMentsScreen> {
-  late ProviderTreatment providerTreatment;
+   ProviderTreatment providerTreatment;
 
   @override
   Widget build(BuildContext context) {

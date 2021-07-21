@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Option {
-  late int id;
-  late String option;
-  late IconData icon;
-  late String route;
-  late Widget screen;
+  int id;
+  String option;
+  IconData icon;
+  String route;
+  Widget screen;
 
-  Option(
-      {required this.id,
-      required this.option,
-      required this.icon,
-      required this.route});
+  Option({this.id, this.option, this.icon, this.route});
 
   factory Option.fromJSONResponse(Map<String, dynamic> response) {
     return Option(

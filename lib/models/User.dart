@@ -9,12 +9,12 @@ class User {
   List<dynamic> enterprises;
 
   User(
-      {required this.id,
-      required this.email,
-      required this.password,
-      required this.role,
-      required this.fullName,
-      required this.enterprises});
+      {this.id,
+      this.email,
+      this.password,
+      this.role,
+      this.fullName,
+      this.enterprises});
 
   factory User.fromJsonResponse(Map<String, dynamic> response) {
     return User(

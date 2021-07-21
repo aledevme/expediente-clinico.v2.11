@@ -16,11 +16,11 @@ class AddTreatmentScreen extends StatefulWidget {
 }
 
 class _AddTreatmentScreenState extends State<AddTreatmentScreen> {
-  late AppProvider appProvider;
-  late Treatment treatment;
+   AppProvider appProvider;
+   Treatment treatment;
   List<Service> services = [];
   ServicesService servicesService = ServicesService();
-  late Service selectedService;
+   Service selectedService;
   bool isLoadingServices = true;
 
   @override
@@ -64,7 +64,7 @@ class _AddTreatmentScreenState extends State<AddTreatmentScreen> {
                   hint: 'Precio',
                   onChange: (value) {
                     setState(() {
-                      treatment.price = double.tryParse(value)!;
+                      treatment.price = double.tryParse(value);
                     });
                   },
                   keyboardType: TextInputType.number,

@@ -63,6 +63,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
+                SizedBox(height: 15),
+                Text(
+                  provider.clinic?.name ?? 'Sin Clinica seleccionada',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
               ],
             ),
           ),

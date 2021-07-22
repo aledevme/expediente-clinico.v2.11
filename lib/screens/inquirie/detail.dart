@@ -192,7 +192,7 @@ class _DetailInquirieState extends State<DetailInquirie>
             isLoadinServices ? CircularProgressIndicator() : comboServices(),
             SizedBox(height: 20),
             Text(
-                'Estimado de servicio: ${selectedService.price == null ? "sin servicio" : selectedService.price}'),
+                'Estimado de servicio: ${selectedService?.price == null ? "sin servicio" : selectedService.price}'),
             SizedBox(height: 20),
             CustomTextField(
               keyboardType: TextInputType.number,

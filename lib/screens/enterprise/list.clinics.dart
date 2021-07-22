@@ -29,9 +29,11 @@ class _ListOfClinicsState extends State<ListOfClinics> {
               itemBuilder: (BuildContext context, int index) {
                 Clinic clinic = snapshot.data[index];
                 return ListTile(
-                    onTap: () => actionCheck(appProvider.clinic),
+                    onTap: () => appProvider.clinic = clinic,
                     title: Text(clinic.name),
-                    trailing: showCheck(appProvider.clinic));
+                    trailing: appProvider.clinic?.id == clinic.id
+                        ? Icon(Icons.check)
+                        : null);
               },
             );
           } else {

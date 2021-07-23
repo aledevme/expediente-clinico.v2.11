@@ -16,11 +16,12 @@ class AddTreatmentScreen extends StatefulWidget {
 }
 
 class _AddTreatmentScreenState extends State<AddTreatmentScreen> {
-   AppProvider appProvider;
-   Treatment treatment;
+  TextEditingController priceController = TextEditingController();
+  AppProvider appProvider;
+  Treatment treatment = Treatment();
   List<Service> services = [];
   ServicesService servicesService = ServicesService();
-   Service selectedService;
+  Service selectedService;
   bool isLoadingServices = true;
 
   @override
@@ -55,14 +56,9 @@ class _AddTreatmentScreenState extends State<AddTreatmentScreen> {
                     : comboServices(),
                 SizedBox(height: 15),
                 CustomTextField(
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  helperText: "",
-                  maxLenght: 100,
-                  controller: null,
-                  value: selectedService.price,
+                  controller: priceController,
                   hint: 'Precio',
-                  onChange: (value) {
+                  onChange: (String value) {
                     setState(() {
                       treatment.price = double.tryParse(value);
                     });
@@ -114,8 +110,8 @@ class _AddTreatmentScreenState extends State<AddTreatmentScreen> {
           onChange: (value) {
             setState(() {
               selectedService = value;
-              treatment.nameTreatment = selectedService.typeOfService;
-              treatment.price = double.parse(selectedService.price);
+
+              //priceController.text = treatment.price.toString();
             });
           },
           children: services
@@ -126,6 +122,8 @@ class _AddTreatmentScreenState extends State<AddTreatmentScreen> {
       );
 
   void addTreatment(ProviderTreatment providerTreatment) {
+    treatment.nameTreatment = selectedService.typeOfService;
+    treatment.price = double.parse(selectedService.price);
     providerTreatment.treatment = treatment;
     Navigator.pop(context);
   }

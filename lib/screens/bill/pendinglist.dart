@@ -199,7 +199,6 @@ class _PendingListInquiriesState extends State<PendingListInquiries>
 
   void payBill(Bill bill, AppProvider provider) async {
     var uuid = Uuid();
-    print('hola');
     var resPdf = await PDFUtil.createPDF(
         createContent(provider, bill), 'facturas', uuid.v4());
     print(resPdf);
@@ -241,6 +240,8 @@ class _PendingListInquiriesState extends State<PendingListInquiries>
   }
 
   dynamic createContent(AppProvider provider, Bill bill) {
+    print(bill.inquirie.treatments);
+
     return PdfWidget.Container(
         width: double.infinity,
         child: PdfWidget.Column(
@@ -259,6 +260,7 @@ class _PendingListInquiriesState extends State<PendingListInquiries>
               PdfWidget.Text('Procedimiento: ${bill.inquirie.service}'),
               PdfWidget.SizedBox(height: 20),
               PdfWidget.Text('SubTotal: ${bill.subtotal}'),
+              PdfWidget.SizedBox(height: 20),
             ]));
   }
 }

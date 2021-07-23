@@ -69,8 +69,8 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
   void getPatients() async {
     var appProvider = Provider.of<AppProvider>(context, listen: false);
 
-    List<Expedient> expedients = await expedientService
-        .getPatients(appProvider.clinic.id) as List<Expedient>;
+    List<Expedient> expedients =
+        await expedientService.getPatients(appProvider.clinic.id);
 
     setState(() {
       isLoading = false;
@@ -134,7 +134,7 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
                         fontSize: 20,
                       )),
                   GestureDetector(
-                    onTap: () => setState(() => selectedExpedient),
+                    onTap: () => setState(() => selectedExpedient = null),
                     child: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(1),
@@ -192,11 +192,11 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
                   : comboServices(),
               SizedBox(height: 20),
               Text(
-                  'Servicio: ${selectedService.typeOfTreatment == null ? "sin servicio seleccionado" : selectedService.typeOfTreatment}',
+                  'Servicio: ${selectedService?.typeOfTreatment == null ? "sin servicio seleccionado" : selectedService.typeOfTreatment}',
                   style: AppStyle.labelInputStyle),
               SizedBox(height: 20),
               Text(
-                  'Costo base : \$${selectedService.price == null ? 0 : selectedService.price}',
+                  'Costo base : \$${selectedService?.price == null ? 0 : selectedService.price}',
                   style: AppStyle.labelInputStyle),
               SizedBox(height: 20),
               Row(
@@ -292,12 +292,6 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
               selectedService != null ? totalTreatment() : Container(),
               SizedBox(height: 20),
               CustomTextField(
-                onChange: () {},
-                keyboardType: TextInputType.text,
-                iconOnRight: null,
-                value: null,
-                helperText: "",
-                maxLenght: 100,
                 hint: 'Seleccione una fecha',
                 controller: dateInputController,
                 isReadOnly: true,
@@ -306,13 +300,6 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
               ),
               SizedBox(height: 20),
               CustomTextField(
-                controller: null,
-                iconOnLeft: null,
-                keyboardType: TextInputType.text,
-                iconOnRight: null,
-                value: null,
-                helperText: "",
-                maxLenght: 150,
                 rows: 8,
                 hint: 'Descripción de la consulta',
                 onChange: (value) {
@@ -348,10 +335,10 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
         child: CustomDropDown(
           hintText: 'Seleccione un servicio',
           actualValue: selectedService,
-          onChange: (value) {
+          onChange: (dynamic value) {
             setState(() {
               selectedService = value;
-              inquirie.service = selectedService.typeOfService;
+              //inquirie.service = selectedService.typeOfService;
             });
           },
           children: services
@@ -513,12 +500,12 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
               padding: EdgeInsets.zero,
               itemCount: filteredPatients.length,
               itemBuilder: (BuildContext context, int index) {
-                final Expedient expedient = filteredPatients[index];
+                Expedient expedient = filteredPatients[index];
                 return GestureDetector(
                     onTap: () => {
                           setState(() {
                             selectedExpedient = expedient;
-                            inquirie.expedient = expedient;
+                            //inquirie.expedient = expedient;
                           })
                         },
                     child: patientItem(expedient));
@@ -600,7 +587,7 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
   }
 
   void addPatient() async {
-    double totalInquirie = extras + double.tryParse(selectedService.price);
+    double totalInquirie = extras + double.tryParse(selectedService?.price);
     if (selectedService == null) {
       showDialog(
           context: context,

@@ -16,9 +16,9 @@ class AddRecetaryScreen extends StatefulWidget {
 }
 
 class _AddRecetaryScreenState extends State<AddRecetaryScreen> {
-   Recetary recetary;
-   ProviderRecetary providerRecetary;
-   Medicine selectedMedicine;
+  Recetary recetary = Recetary();
+  ProviderRecetary providerRecetary;
+  Medicine selectedMedicine;
   MedicineService medicineService = MedicineService();
   AppProvider appProvider = AppProvider();
 
@@ -42,12 +42,6 @@ class _AddRecetaryScreenState extends State<AddRecetaryScreen> {
                   comboMedicines(),
                   SizedBox(height: 20),
                   CustomTextField(
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    value: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     keyboardType: TextInputType.number,
                     hint: 'Cantidad de receta',
                     onChange: (value) {
@@ -101,10 +95,10 @@ class _AddRecetaryScreenState extends State<AddRecetaryScreen> {
             appProvider.role == 'Dueño'
                 ? appProvider.enterprise.id
                 : appProvider.enterpriseIdFrom),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Medicine>> snapshot) {
           if (snapshot.hasData) {
             return CustomDropDown(
-              actualValue: null,
               hintText: selectedMedicine == null
                   ? 'Seleccione un medicamento'
                   : '${selectedMedicine.product} - ${selectedMedicine.stock}',
@@ -114,7 +108,6 @@ class _AddRecetaryScreenState extends State<AddRecetaryScreen> {
                   print(value);
                   setState(() {
                     selectedMedicine = value;
-                    recetary.medicine = selectedMedicine.product;
                   });
                 });
               },
@@ -133,6 +126,7 @@ class _AddRecetaryScreenState extends State<AddRecetaryScreen> {
       ));
 
   void addMedicine() {
+    recetary.medicine = selectedMedicine.product;
     providerRecetary.recetary = recetary;
     Navigator.pop(context);
   }

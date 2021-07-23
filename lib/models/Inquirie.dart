@@ -38,7 +38,7 @@ class Inquirie {
         expedient: Expedient.fromJsonResponse(response['patient']),
         service: response['service'],
         baseprice: response['baseprice']["\$numberDecimal"] ?? 0,
-        treatments: response['treatments'] ?? [],
+        treatments: response['extraservices'] ?? [],
         status: response['status'],
         type: response['type'],
         history: response['subinquirie'] ?? [],

@@ -45,13 +45,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   Text('Rellene los campos para completar el formulario.'),
                   SizedBox(height: 20),
                   CustomTextField(
-                    value: null,
-                    keyboardType: TextInputType.text,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Nombre del paciente',
                     onChange: (value) {
                       setState(() {
@@ -61,13 +54,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Apellido del paciente',
                     onChange: (value) {
                       setState(() {
@@ -77,13 +63,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Direccion de vivienda',
                     onChange: (value) {
                       setState(() {
@@ -94,11 +73,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   SizedBox(height: 15),
                   //Fecha de nacimiento
                   CustomTextField(
-                    onChange: () {},
-                    value: null,
-                    keyboardType: TextInputType.number,
-                    iconOnLeft: null,
-                    maxLenght: 100,
                     onTap: _pickDateDialog,
                     iconOnRight: Icons.calendar_today,
                     isReadOnly: true,
@@ -110,13 +84,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   isChild ? formIfPatiendIsChild() : Container(),
                   isChild ? SizedBox(height: 15) : Container(),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Lugar de trabajo',
                     onChange: (value) {
                       setState(() {
@@ -126,13 +93,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Email',
                     onChange: (value) {
                       setState(() {
@@ -142,13 +102,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Motivo de la visita',
                     onChange: (value) {
                       setState(() {
@@ -158,13 +111,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Es alergico a:',
                     onChange: (value) {
                       setState(() {
@@ -174,12 +120,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
                     controller: null,
                     hint: 'Clinica odontologica que visitaba:',
                     onChange: (value) {
@@ -190,13 +130,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Clinica dental que visitaba:',
                     onChange: (value) {
                       setState(() {
@@ -206,13 +139,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Clinica que visitaba:',
                     onChange: (value) {
                       setState(() {
@@ -222,13 +148,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   ),
                   SizedBox(height: 15),
                   CustomTextField(
-                    keyboardType: TextInputType.text,
-                    value: null,
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Otros:',
                     onChange: (value) {
                       setState(() {

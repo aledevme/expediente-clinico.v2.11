@@ -22,7 +22,7 @@ class _ViewDatesScreenState extends State<ViewDatesScreen> {
         child: Column(
           children: [
             Header(
-              children: appProvider.clinic.id == null
+              children: appProvider.clinic?.id == null
                   ? HeaderOnlyBack(
                       headerTitle: 'Citas',
                     )
@@ -33,7 +33,7 @@ class _ViewDatesScreenState extends State<ViewDatesScreen> {
                     ),
             ),
             Expanded(
-              child: appProvider.clinic.id == null
+              child: appProvider.clinic?.id == null
                   ? Center(
                       child: Text(
                           'Has entrado como dueño ve a empresas, entra a una y en tus clinicas selecciona una clinica con la que quisieras ver información.',

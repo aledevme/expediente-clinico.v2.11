@@ -72,7 +72,7 @@ class _ViewPatientsScreenState extends State<ViewPatientsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Header(
-              children: appProvider.clinic.id == null
+              children: appProvider.clinic?.id == null
                   ? HeaderOnlyBack(
                       headerTitle: 'Pacientes',
                     )
@@ -83,7 +83,7 @@ class _ViewPatientsScreenState extends State<ViewPatientsScreen> {
                     ),
             ),
             Expanded(
-              child: appProvider.clinic.id == null
+              child: appProvider.clinic?.id == null
                   ? Center(
                       child: Text(
                           'Has entrado como dueño ve a empresas, entra a una y en tus clinicas selecciona una clinica con la que quisieras ver información.',

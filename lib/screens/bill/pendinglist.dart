@@ -58,7 +58,7 @@ class _PendingListInquiriesState extends State<PendingListInquiries>
     return Scaffold(
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Header(
-          children: appProvider.clinic.id != null
+          children: appProvider.clinic?.id != null
               ? HeaderOnlyBack(
                   headerTitle: 'Facturación',
                 )
@@ -67,7 +67,7 @@ class _PendingListInquiriesState extends State<PendingListInquiries>
                 ),
         ),
         SizedBox(height: 10),
-        appProvider.clinic.id == null
+        appProvider.clinic?.id == null
             ? Container()
             : Expanded(
                 child: listbills(),
@@ -78,7 +78,7 @@ class _PendingListInquiriesState extends State<PendingListInquiries>
 
   Widget listbills() {
     return FutureBuilder(
-        future: billService.getBillsByClinic(appProvider.clinic.id),
+        future: billService.getBillsByClinic(appProvider.clinic?.id),
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
             //return Container();

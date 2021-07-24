@@ -23,7 +23,7 @@ class _ViewServicesScreenState extends State<ViewServicesScreen> {
           children: [
             Header(
               children: appProvider.role == 'Dueño' &&
-                      appProvider.enterprise.id == null
+                      appProvider.enterprise?.id == null
                   ? HeaderOnlyBack(
                       headerTitle: 'Servicios',
                     )

@@ -37,7 +37,7 @@ class _ViewInquiriesScreenState extends State<ViewInquiriesScreen> {
         child: Column(
           children: [
             Header(
-              children: provider.clinic.id == null
+              children: provider.clinic?.id == null
                   ? HeaderOnlyBack(
                       headerTitle: 'Consultas',
                     )
@@ -78,7 +78,7 @@ class _ViewInquiriesScreenState extends State<ViewInquiriesScreen> {
                 )),
             SizedBox(height: 15),
             Expanded(
-              child: provider.clinic.id == null
+              child: provider.clinic?.id == null
                   ? Center(
                       child: Text(
                           'Has entrado como dueño ve a empresas, entra a una y en tus clinicas selecciona una clinica con la que quisieras ver información.',
@@ -170,8 +170,7 @@ class _ViewInquiriesScreenState extends State<ViewInquiriesScreen> {
     var provider = Provider.of<AppProvider>(context, listen: false);
 
     if (provider.clinic != null) {
-      var res = await inquirieService.getInquiriesByClinic(provider.clinic.id)
-          as List<Inquirie>;
+      var res = await inquirieService.getInquiriesByClinic(provider.clinic?.id);
 
       setState(() {
         isLoading = false;

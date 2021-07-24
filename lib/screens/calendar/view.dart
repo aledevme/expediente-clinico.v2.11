@@ -37,7 +37,7 @@ class _CalendarForDoctorScreenState extends State<CalendarForDoctorScreen> {
   void initState() {
     var appProvider = Provider.of<AppProvider>(context, listen: false);
 
-    if (appProvider.clinic.id != null) {
+    if (appProvider.clinic?.id != null) {
       getDatesByClinic(appProvider.clinic.id);
       getStaff();
     }
@@ -51,8 +51,7 @@ class _CalendarForDoctorScreenState extends State<CalendarForDoctorScreen> {
         await staffService.getStaffByEnteprise(appProvider.clinic.enterprise);
     setState(() {
       isLoadingDoctors = false;
-      staffList = res.where((element) => element.role == 'Doctor').toList()
-          as List<Staff>;
+      staffList = res.where((element) => element.role == 'Doctor').toList();
     });
   }
 
@@ -64,7 +63,7 @@ class _CalendarForDoctorScreenState extends State<CalendarForDoctorScreen> {
         child: Column(
           children: [
             Header(
-              children: appProvider.clinic.id == null
+              children: appProvider.clinic?.id == null
                   ? HeaderOnlyBack(
                       headerTitle: 'Calendario',
                     )
@@ -107,7 +106,7 @@ class _CalendarForDoctorScreenState extends State<CalendarForDoctorScreen> {
                         ? 'Todas las citas'
                         : 'Citas de: ${selectedStaff.name} ${selectedStaff.lastname}')
                 : Container(),
-            appProvider.clinic.id == null
+            appProvider.clinic?.id == null
                 ? Expanded(
                     child: Center(
                       child: Text(

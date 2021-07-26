@@ -143,7 +143,7 @@ class _ViewInquiriesScreenState extends State<ViewInquiriesScreen> {
           ),
           Text('Expediente general.'),
           SizedBox(height: 10),
-          Text(inquirie.expedient.badFor),
+          Text(inquirie.expedient.badFor ?? "Sin registro de malestar"),
           SizedBox(height: 10),
           Text('${inquirie.service}:'),
           SizedBox(height: 10),

@@ -30,7 +30,7 @@ class _ListOfClinicsState extends State<ListOfClinics> {
                 Clinic clinic = snapshot.data[index];
                 return ListTile(
                     onTap: () => appProvider.clinic = clinic,
-                    title: Text(clinic.name),
+                    title: Text(clinic.name ?? "Sin nombre de clinica"),
                     trailing: appProvider.clinic?.id == clinic.id
                         ? Icon(Icons.check)
                         : null);

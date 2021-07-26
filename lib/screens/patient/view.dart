@@ -163,7 +163,10 @@ class _ViewPatientsScreenState extends State<ViewPatientsScreen> {
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(expedient.whyVisiting), getAge(expedient)],
+                children: [
+                  Text(expedient.whyVisiting ?? "Sin razon de visita"),
+                  getAge(expedient)
+                ],
               )
             ],
           ),

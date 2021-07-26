@@ -47,6 +47,7 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
   bool isLoadingServices = true;
   AppProvider appProvider;
   bool isLoading = false;
+  bool isLoadingRequest = false;
   ExpedientService expedientService = ExpedientService();
   List<Map<String, dynamic>> recetary = [];
   List<Map<String, dynamic>> treatments = [];
@@ -239,13 +240,6 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
                 children: [
                   SizedBox(height: 10),
                   CustomTextField(
-                    onTap: () {},
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    value: null,
-                    controller: null,
-                    helperText: "",
-                    maxLenght: 100,
                     keyboardType: TextInputType.number,
                     hint: 'Prima inicial',
                     onChange: (String value) {
@@ -256,12 +250,6 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
                   ),
                   SizedBox(height: 10),
                   CustomTextField(
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    value: null,
-                    controller: null,
-                    helperText: "",
-                    maxLenght: 100,
                     keyboardType: TextInputType.number,
                     hint: 'Cuota de preferencia',
                     onChange: (dynamic value) {
@@ -272,12 +260,6 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
                   ),
                   SizedBox(height: 10),
                   CustomTextField(
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    value: null,
-                    controller: null,
-                    helperText: "",
-                    maxLenght: 100,
                     keyboardType: TextInputType.number,
                     hint: 'No de sesiones de pago',
                     onChange: (value) {
@@ -317,7 +299,7 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
                       borderSide: BorderSide.none),
                   color: Color(0xff2667ff),
                   textColor: Colors.white,
-                  onPressed: addPatient,
+                  onPressed: isLoadingRequest ? null : addPatient,
                   child: Text('Crear Consulta'))
             ],
           ),
@@ -447,9 +429,13 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
                   color: Colors.grey[700]),
             ),
             SizedBox(height: 15),
-            Text('Malestar: ' + selectedExpedient.badFor),
+            Text(selectedExpedient.badFor != null
+                ? 'Malestar: ${selectedExpedient.badFor}'
+                : "Sin registro de malestar"),
             SizedBox(height: 15),
-            Text('Motivo: ' + selectedExpedient.whyVisiting),
+            Text(selectedExpedient.whyVisiting != null
+                ? 'Motivo: ${selectedExpedient?.whyVisiting}'
+                : "Sin razon de visita"),
             SizedBox(height: 15),
             Text('${selectedExpedient.dateBirthday}')
           ],
@@ -517,7 +503,7 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
         margin: EdgeInsets.only(bottom: 10),
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         decoration: BoxDecoration(
-            color: Colors.grey[200]?.withOpacity(0.7),
+            color: Colors.grey[200].withOpacity(0.7),
             borderRadius: BorderRadius.circular(5)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -532,7 +518,10 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text(expedient.whyVisiting), getAge(expedient)],
+              children: [
+                Text(expedient.whyVisiting ?? "Sin razon de visita"),
+                getAge(expedient)
+              ],
             )
           ],
         ),
@@ -580,15 +569,26 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
 
     setState(() {
       extras = sum;
-      totalInquirie = subTotal;
+      subTotal = totalInquirie;
     });
 
     return Text('Subtotal: $subTotal');
   }
 
   void addPatient() async {
-    double totalInquirie = extras + double.tryParse(selectedService?.price);
+    setState(() {
+      isLoadingRequest = true;
+    });
+    double totalInquirie;
+
+    if (deposit != null && deposit > 0) {
+      totalInquirie = extras + double.tryParse(selectedService?.price);
+    }
+
     if (selectedService == null) {
+      setState(() {
+        isLoadingRequest = false;
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -597,7 +597,10 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
               content: Text('Seleccione un servicio antes de continuar'),
             );
           });
-    } else if (deposit > totalInquirie) {
+    } else if (deposit > 0 && deposit > totalInquirie) {
+      setState(() {
+        isLoadingRequest = false;
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -608,6 +611,21 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
             );
           });
     } else {
+      if (dateOfDate == null || description == null || description.isEmpty) {
+        setState(() {
+          isLoadingRequest = false;
+        });
+        return showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Error'),
+                content: Text(
+                    'Fecha de acción de consulta y descripción son necesarios.'),
+              );
+            });
+      }
+
       print(_radioTypeInquirie == 0 ? 'treatment' : 'directly');
       providerTreatment.treatments
           .map((e) => treatments.add(e.toJson()))
@@ -641,6 +659,9 @@ class _AddInquirieScreenState extends State<AddInquirieScreen> {
         providerRecetary.clear();
         providerTreatment.clear();
       } else {
+        setState(() {
+          isLoadingRequest = false;
+        });
         showDialog(
             context: context,
             builder: (BuildContext context) {

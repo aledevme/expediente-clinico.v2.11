@@ -21,13 +21,13 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
     with SingleTickerProviderStateMixin {
   //tabs config
   int currentIndex = 0;
-   TabController _controller;
-   Expedient expedient;
+  TabController _controller;
+  Expedient expedient;
 
   TextEditingController dateInputController = TextEditingController();
   TextEditingController messageController = TextEditingController();
   ExpedientService expedientService = ExpedientService();
-   AppProvider appProvider;
+  AppProvider appProvider;
   BillService billService = BillService();
 
   @override
@@ -44,9 +44,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
   }
 
   //screen patient detail state
-   DateTime _selectedDate;
-   String dateOfDate;
-   String message;
+  DateTime _selectedDate;
+  String dateOfDate;
+  String message;
   bool loadingMessage = false;
 
   @override
@@ -131,7 +131,10 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
     return TabBarView(
       controller: _controller,
       children: [
-        detailPatient(),
+        ListView(
+          padding: EdgeInsets.zero,
+          children: [detailPatient()],
+        ),
         historyPatient(expedient.history),
         listOfInquiries(),
         listOfBills()
@@ -184,19 +187,20 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
                 SizedBox(height: 5),
                 Text('Razon de visita'),
                 SizedBox(height: 5),
-                Text(expedient.whyVisiting),
+                Text(expedient.whyVisiting ?? "Sin razon de visita"),
                 SizedBox(height: 5),
                 Text('Malestar'),
                 SizedBox(height: 5),
-                Text(expedient.badFor),
+                Text(expedient.badFor ?? "Sin registro de malestar"),
                 SizedBox(height: 5),
                 Text('Ultima clinica visitada'),
                 SizedBox(height: 5),
-                Text(expedient.lastClinicVisiting),
+                Text(expedient.lastClinicVisiting ?? "Sin clinica previa"),
                 SizedBox(height: 5),
                 Text('Ultima clinica odontologica visitada'),
                 SizedBox(height: 5),
-                Text(expedient.odontologyLastArchive)
+                Text(
+                    expedient.odontologyLastArchive ?? "Sin odontologia previa")
               ],
             )
           ],
@@ -231,11 +235,6 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
                   Expanded(
                     child: CustomTextField(
                       keyboardType: TextInputType.text,
-                      value: null,
-                      iconOnLeft: null,
-                      iconOnRight: null,
-                      helperText: "",
-                      maxLenght: 100,
                       rows: 1,
                       controller: messageController,
                       hint: 'Escribe algo',
@@ -433,7 +432,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen>
                   SizedBox(height: 30),
                   InkWell(
                       onTap: () => _launchURL(bill.url),
-                      child: Text('Ver historial de pagos',
+                      child: Text('Ver factura',
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                           )))

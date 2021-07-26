@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:expediente_clinico/providers/app.dart';
 import 'package:expediente_clinico/services/enterprise.dart';
+import 'package:expediente_clinico/utils/navigation.dart';
 import 'package:expediente_clinico/widgets/button.dart';
 import 'package:expediente_clinico/widgets/header.dart';
 import 'package:expediente_clinico/widgets/textfield.dart';
@@ -17,9 +18,10 @@ class _AddEnterpriseState extends State<AddEnterprise> {
   AppProvider provider;
   EnterpriseService service = EnterpriseService();
 
-  String name;
-  String socialReason;
-  String direction;
+  String name = "";
+  String socialReason = "";
+  String direction = "";
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +42,6 @@ class _AddEnterpriseState extends State<AddEnterprise> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Nombre',
                   onChange: (text) {
                     setState(() {
@@ -57,14 +51,6 @@ class _AddEnterpriseState extends State<AddEnterprise> {
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Razon social',
                   onChange: (text) {
                     setState(() {
@@ -74,14 +60,6 @@ class _AddEnterpriseState extends State<AddEnterprise> {
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Dirección',
                   onChange: (text) {
                     setState(() {
@@ -91,7 +69,7 @@ class _AddEnterpriseState extends State<AddEnterprise> {
                 ),
                 SizedBox(height: 20),
                 CustomButton(
-                  onPressed: () => addEnterprise(),
+                  onPressed: isLoading ? null : () => addEnterprise(),
                   titleButton: 'Añadir',
                 )
               ],
@@ -102,19 +80,22 @@ class _AddEnterpriseState extends State<AddEnterprise> {
     );
   }
 
-  Widget enterpriseTextField() => CustomTextField(
-      onTap: () {},
-      iconOnLeft: null,
-      iconOnRight: null,
-      value: null,
-      controller: null,
-      helperText: "",
-      keyboardType: TextInputType.text,
-      maxLenght: 100,
-      onChange: (value) => setState(() => {}),
-      hint: 'Nombre');
-
   void addEnterprise() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (name.isEmpty || socialReason.isEmpty || direction.isEmpty) {
+      setState(() {
+        isLoading = false;
+      });
+      return showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+                title: Text('Error'),
+                content: Text('Rellene los datos porfavor'));
+          });
+    }
     var data = jsonEncode({
       'name': name,
       'socialReason': socialReason,
@@ -127,8 +108,12 @@ class _AddEnterpriseState extends State<AddEnterprise> {
 
     if (res['success']) {
       provider.role != 'Dueño'
-          ? Navigator.popAndPushNamed(context, provider.homeRoute)
-          : Navigator.popAndPushNamed(context, '/admin');
+          ? NavigatorUtil.navigateToAndClear(
+              context,
+              provider
+                  .homeRoute) //Navigator.popAndPushNamed(context, provider.homeRoute)
+          : NavigatorUtil.navigateToAndClear(context,
+              '/admin'); //Navigator.popAndPushNamed(context, '/admin');
     } else {
       showDialog(
           context: context,

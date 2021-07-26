@@ -22,6 +22,8 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
   String price;
   String code;
 
+  bool isLoadingRequest = false;
+
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppProvider>(context);
@@ -40,11 +42,6 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
               children: [
                 SizedBox(height: 20),
                 CustomTextField(
-                  value: null,
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  maxLenght: 100,
-                  controller: null,
                   hint: 'Codigo de servicio',
                   helperText: 'ej: 001',
                   keyboardType: TextInputType.number,
@@ -56,12 +53,6 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  value: null,
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  helperText: "",
-                  maxLenght: 100,
-                  controller: null,
                   hint: 'Servicio',
                   keyboardType: TextInputType.text,
                   onChange: (value) {
@@ -72,12 +63,6 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  value: null,
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  helperText: "",
-                  maxLenght: 100,
-                  controller: null,
                   hint: 'Tratamiento',
                   keyboardType: TextInputType.text,
                   onChange: (value) {
@@ -88,12 +73,6 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  value: null,
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  helperText: "",
-                  maxLenght: 100,
-                  controller: null,
                   hint: 'Precio',
                   keyboardType: TextInputType.number,
                   onChange: (value) {
@@ -104,7 +83,8 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                 ),
                 SizedBox(height: 20),
                 CustomButton(
-                    titleButton: 'Agregar', onPressed: () => addService()),
+                    titleButton: 'Agregar',
+                    onPressed: isLoadingRequest ? null : () => addService()),
               ],
             ),
           )
@@ -114,6 +94,9 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
   }
 
   void addService() async {
+    setState(() {
+      isLoadingRequest = true;
+    });
     if (service != null &&
         treatment != null &&
         price != null &&
@@ -135,6 +118,9 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
       if (res['success']) {
         Navigator.popAndPushNamed(context, provider.homeRoute);
       } else {
+        setState(() {
+          isLoadingRequest = false;
+        });
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -145,6 +131,9 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
             });
       }
     } else {
+      setState(() {
+        isLoadingRequest = false;
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) {

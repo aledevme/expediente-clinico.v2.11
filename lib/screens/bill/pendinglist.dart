@@ -259,6 +259,15 @@ class _PendingListInquiriesState extends State<PendingListInquiries>
               PdfWidget.SizedBox(height: 20),
               PdfWidget.Text('Procedimiento: ${bill.inquirie.service}'),
               PdfWidget.SizedBox(height: 20),
+              PdfWidget.SizedBox(height: 20),
+              // PdfWidget.Column(
+              //     children: bill.inquirie.recetaries
+              //         .map((e) => e['medicine'])
+              //         .toList()),
+              PdfWidget.Text(
+                  'Paciente: ${bill.patient.name} ${bill.patient.lastname}'),
+              PdfWidget.Text('Procedimiento: ${bill.inquirie.service}'),
+              PdfWidget.SizedBox(height: 20),
               PdfWidget.Text('SubTotal: ${bill.subtotal}'),
               PdfWidget.SizedBox(height: 20),
             ]));

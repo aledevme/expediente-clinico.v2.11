@@ -33,6 +33,7 @@ class _AddDateScreenState extends State<AddDateScreen> {
   DateService dateService = DateService();
   DateTime _selectedDate;
   Staff selectedStaff;
+  bool isLoadingRequest = false;
   List<String> items = ['Servicio 1', 'Servicio 2', 'Servicio 3', 'Servicio 4'];
   String selectedService;
   Expedient selectedExpedient;
@@ -162,12 +163,6 @@ class _AddDateScreenState extends State<AddDateScreen> {
               itemSelectedExpedient(),
               SizedBox(height: 30),
               CustomTextField(
-                onChange: () {},
-                iconOnLeft: null,
-                value: null,
-                helperText: "",
-                keyboardType: TextInputType.text,
-                maxLenght: 100,
                 iconOnRight: Icons.calendar_today,
                 onTap: _pickDateDialog,
                 controller: dateInputController,
@@ -176,12 +171,6 @@ class _AddDateScreenState extends State<AddDateScreen> {
               ),
               SizedBox(height: 20),
               CustomTextField(
-                onChange: () {},
-                iconOnLeft: null,
-                value: null,
-                helperText: "",
-                keyboardType: TextInputType.text,
-                maxLenght: 100,
                 iconOnRight: Icons.lock_clock,
                 onTap: hourDialog,
                 controller: hourInputController,
@@ -221,7 +210,6 @@ class _AddDateScreenState extends State<AddDateScreen> {
                   color: Color(0xff2667ff),
                   textColor: Colors.white,
                   onPressed: () {
-                    print('hola');
                     addDate();
                   },
                   child: Text('Crear Cita'))
@@ -323,9 +311,13 @@ class _AddDateScreenState extends State<AddDateScreen> {
                   color: Colors.grey[700]),
             ),
             SizedBox(height: 15),
-            Text('Malestar: ' + selectedExpedient.badFor),
+            Text(selectedExpedient.badFor != null
+                ? 'Malestar: ${selectedExpedient.badFor}'
+                : "Sin registro de malestar"),
             SizedBox(height: 15),
-            Text('Motivo: ' + selectedExpedient.whyVisiting),
+            Text(selectedExpedient.whyVisiting != null
+                ? 'Motivo: ${selectedExpedient.whyVisiting}'
+                : "Sin registro de visita"),
             SizedBox(height: 15),
             getAge(selectedExpedient)
           ],
@@ -411,7 +403,10 @@ class _AddDateScreenState extends State<AddDateScreen> {
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text(expedient.whyVisiting), Text('18 años')],
+              children: [
+                Text(expedient.whyVisiting ?? "Sin motivo de visita"),
+                Text('18 años')
+              ],
             )
           ],
         ),
@@ -466,7 +461,13 @@ class _AddDateScreenState extends State<AddDateScreen> {
   }
 
   void addDate() async {
+    setState(() {
+      isLoadingRequest = true;
+    });
     if (appProvider.role != 'Doctor' && selectedStaff == null) {
+      setState(() {
+        isLoadingRequest = false;
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -496,6 +497,9 @@ class _AddDateScreenState extends State<AddDateScreen> {
           if (dateRes['success']) {
             Navigator.popAndPushNamed(context, appProvider.homeRoute);
           } else {
+            setState(() {
+              isLoadingRequest = false;
+            });
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
@@ -507,6 +511,9 @@ class _AddDateScreenState extends State<AddDateScreen> {
           }
         } else {}
       } else {
+        setState(() {
+          isLoadingRequest = false;
+        });
         showDialog(
             context: context,
             builder: (BuildContext context) {

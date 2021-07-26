@@ -30,23 +30,24 @@ class _ListOfServicesState extends State<ListOfServices> {
             widget.role == 'Dueño'
                 ? widget.enterprise.id
                 : widget.enterpriseId),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<Service>> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data.length == 0) {
               return noData();
             } else {
               return ListView.builder(
                 padding: EdgeInsets.zero,
-                itemCount: (snapshot.data as List<Service>).length,
+                itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
+                  print(snapshot.data[index]);
                   Service service = snapshot.data[index];
+
                   return ListTile(
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(service == null
-                            ? ' ${service.code} ${service.typeOfService}'
-                            : "Sin servicio"),
+                        Text('${service.code} ${service.typeOfService}' ??
+                            "Sin servicio"),
                         Row(
                           children: [
                             IconButton(

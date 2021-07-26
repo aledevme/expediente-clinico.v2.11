@@ -5,6 +5,7 @@ import 'package:expediente_clinico/models/Enterprise.dart';
 import 'package:expediente_clinico/screens/enterprise/list.clinics.dart';
 import 'package:expediente_clinico/services/clinic.dart';
 import 'package:expediente_clinico/services/enterprise.dart';
+import 'package:expediente_clinico/widgets/alerts/alertTemplate.dart';
 import 'package:expediente_clinico/widgets/button.dart';
 import 'package:expediente_clinico/widgets/header.dart';
 import 'package:expediente_clinico/widgets/textfield.dart';
@@ -27,6 +28,8 @@ class _DetailEnterpriseState extends State<DetailEnterprise>
 
   ClinicService clinicService = ClinicService();
   EnterpriseService enterpriseService = EnterpriseService();
+
+  bool loading = false;
 
   @override
   void initState() {
@@ -118,14 +121,6 @@ class _DetailEnterpriseState extends State<DetailEnterprise>
                 color: Colors.grey[500])),
         SizedBox(height: 20),
         CustomTextField(
-          onTap: () {},
-          iconOnLeft: null,
-          iconOnRight: null,
-          value: null,
-          controller: null,
-          helperText: "",
-          keyboardType: TextInputType.text,
-          maxLenght: 100,
           hint: 'Nombre',
           onChange: (event) {
             setState(() {
@@ -135,14 +130,6 @@ class _DetailEnterpriseState extends State<DetailEnterprise>
         ),
         SizedBox(height: 20),
         CustomTextField(
-          onTap: () {},
-          iconOnLeft: null,
-          iconOnRight: null,
-          value: null,
-          controller: null,
-          helperText: "",
-          keyboardType: TextInputType.text,
-          maxLenght: 100,
           hint: 'dirección',
           onChange: (event) {
             setState(() {
@@ -153,13 +140,28 @@ class _DetailEnterpriseState extends State<DetailEnterprise>
         SizedBox(height: 20),
         CustomButton(
           titleButton: 'Guardar',
-          onPressed: () => addClinic(),
+          onPressed: loading ? null : () => addClinic(),
         )
       ],
     );
   }
 
   void addClinic() async {
+    setState(() {
+      loading = true;
+    });
+
+    if (name == null ||
+        name.isEmpty ||
+        direction == null ||
+        direction.isEmpty) {
+      setState(() {
+        loading = false;
+      });
+      return requestFields(
+          context, Text('Error al ingresar'), Text('Rellene los campos'));
+    }
+
     var data = jsonEncode(
         {'name': name, 'direction': direction, 'enterprise': enterprise.id});
 

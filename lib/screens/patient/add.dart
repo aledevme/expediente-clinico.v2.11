@@ -2,6 +2,7 @@ import 'package:expediente_clinico/models/Expedient.dart';
 import 'package:expediente_clinico/providers/app.dart';
 import 'package:expediente_clinico/providers/patient.dart';
 import 'package:expediente_clinico/services/expedient.dart';
+import 'package:expediente_clinico/widgets/alerts/alertTemplate.dart';
 import 'package:expediente_clinico/widgets/button.dart';
 import 'package:expediente_clinico/widgets/header.dart';
 import 'package:expediente_clinico/widgets/textfield.dart';
@@ -17,10 +18,11 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
   int age = 0;
   DateTime birthDayDate;
   bool isChild = false;
+  bool loading = false;
   AppProvider appProvider;
   TextEditingController birthDateController = TextEditingController();
   ProviderPatient providerPatient;
-  Expedient expedient;
+  Expedient expedient = Expedient();
   ExpedientService service = ExpedientService();
 
   @override
@@ -158,7 +160,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   SizedBox(height: 15),
                   CustomButton(
                     titleButton: 'Agregar paciente',
-                    onPressed: addPatient,
+                    onPressed: loading ? null : addPatient,
                   )
                 ],
               ),
@@ -173,13 +175,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
     return Column(
       children: [
         CustomTextField(
-          keyboardType: TextInputType.text,
-          value: null,
-          iconOnLeft: null,
-          iconOnRight: null,
-          helperText: "",
-          maxLenght: 100,
-          controller: null,
           hint: 'Nombre del padre de familia',
           onChange: (value) {
             setState(() {
@@ -189,13 +184,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
         ),
         SizedBox(height: 15),
         CustomTextField(
-          keyboardType: TextInputType.text,
-          value: null,
-          iconOnLeft: null,
-          iconOnRight: null,
-          helperText: "",
-          maxLenght: 100,
-          controller: null,
           hint: 'Nombre de la madre de familia',
           onChange: (value) {
             setState(() {
@@ -205,13 +193,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
         ),
         SizedBox(height: 15),
         CustomTextField(
-          keyboardType: TextInputType.text,
-          value: null,
-          iconOnLeft: null,
-          iconOnRight: null,
-          helperText: "",
-          maxLenght: 100,
-          controller: null,
           hint: 'Nombre del responsable/titular',
           onChange: (value) {
             setState(() {
@@ -221,13 +202,6 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
         ),
         SizedBox(height: 15),
         CustomTextField(
-          keyboardType: TextInputType.text,
-          value: null,
-          iconOnLeft: null,
-          iconOnRight: null,
-          helperText: "",
-          maxLenght: 100,
-          controller: null,
           hint: 'Lugar de estudio',
           onChange: (value) {
             setState(() {
@@ -266,6 +240,25 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
   }
 
   void addPatient() async {
+    setState(() {
+      loading = true;
+    });
+    if (expedient.name == null ||
+        expedient.name.isEmpty ||
+        expedient.lastname == null ||
+        expedient.lastname.isEmpty ||
+        expedient.direction == null ||
+        expedient.direction.isEmpty ||
+        birthDayDate == null) {
+      setState(() {
+        loading = false;
+      });
+      return requestFields(
+          context,
+          Text('Error con ingresar paciente'),
+          Text(
+              'Nombre, apellido, dirección y fecha de nacimiento son necesarios.'));
+    }
     if (isChild) {
       expedient.child = {
         'fatherName': expedient.fatherName,

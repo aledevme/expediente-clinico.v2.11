@@ -19,6 +19,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
   String product;
   String stock;
   MedicineService medicineService = MedicineService();
+  bool isLoadingRequest = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +38,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 children: [
                   CustomTextField(
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    value: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Categoria',
                     keyboardType: TextInputType.text,
                     onChange: (value) {
@@ -53,12 +48,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   ),
                   SizedBox(height: 20),
                   CustomTextField(
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    value: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'Nombre de producto',
                     keyboardType: TextInputType.text,
                     onChange: (value) {
@@ -69,12 +58,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   ),
                   SizedBox(height: 20),
                   CustomTextField(
-                    iconOnLeft: null,
-                    iconOnRight: null,
-                    value: null,
-                    helperText: "",
-                    maxLenght: 100,
-                    controller: null,
                     hint: 'stock',
                     keyboardType: TextInputType.number,
                     onChange: (value) {
@@ -86,7 +69,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   SizedBox(height: 20),
                   CustomButton(
                     titleButton: 'Guardar',
-                    onPressed: () => addMedicine(),
+                    onPressed: isLoadingRequest ? null : () => addMedicine(),
                   )
                 ],
               ),
@@ -98,6 +81,9 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
   }
 
   void addMedicine() async {
+    setState(() {
+      isLoadingRequest = true;
+    });
     if (category != null &&
         product != null &&
         stock != null &&
@@ -114,6 +100,9 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
       if (res['success']) {
         Navigator.popAndPushNamed(context, provider.homeRoute);
       } else {
+        setState(() {
+          isLoadingRequest = false;
+        });
         showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -123,6 +112,9 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
             });
       }
     } else {
+      setState(() {
+        isLoadingRequest = false;
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) {

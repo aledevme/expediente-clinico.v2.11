@@ -5,6 +5,8 @@ import 'package:expediente_clinico/models/Enterprise.dart';
 import 'package:expediente_clinico/providers/app.dart';
 import 'package:expediente_clinico/services/enterprise.dart';
 import 'package:expediente_clinico/services/staff.dart';
+import 'package:expediente_clinico/utils/navigation.dart';
+import 'package:expediente_clinico/widgets/alerts/alertTemplate.dart';
 import 'package:expediente_clinico/widgets/button.dart';
 import 'package:expediente_clinico/widgets/dropdown.dart';
 import 'package:expediente_clinico/widgets/header.dart';
@@ -27,15 +29,17 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
 
   bool hasPermissionToViewAll = false;
 
-  String name;
-  String lastname;
-  String email;
-  String password;
-  String dui;
-  String location;
+  String name = "";
+  String lastname = "";
+  String email = "";
+  String password = "";
+  String dui = "";
+  String location = "";
   String selectedRole;
   Enterprise selectedEnterprise;
   Clinic selectedClinic;
+
+  bool isLoading = false;
 
   List<String> roles = ['Doctor', 'Asistente', 'Secretaria'];
 
@@ -62,93 +66,57 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
               padding: EdgeInsets.only(top: 0, left: 20, right: 20, bottom: 20),
               children: [
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Nombre del empleado',
                   onChange: (text) {
-                    name = text;
+                    setState(() {
+                      name = text;
+                    });
                   },
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Apellido del empleado',
                   onChange: (text) {
-                    lastname = text;
+                    setState(() {
+                      lastname = text;
+                    });
                   },
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Email del empleado',
                   onChange: (text) {
-                    email = text;
+                    setState(() {
+                      email = text;
+                    });
                   },
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Contraseña empleado',
                   needHideText: true,
                   onChange: (text) {
-                    password = text;
+                    setState(() {
+                      password = text;
+                    });
                   },
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Dui del empleado',
                   onChange: (text) {
-                    dui = text;
+                    setState(() {
+                      dui = text;
+                    });
                   },
                 ),
                 SizedBox(height: 20),
                 CustomTextField(
-                  onTap: () {},
-                  iconOnLeft: null,
-                  iconOnRight: null,
-                  value: null,
-                  controller: null,
-                  helperText: "",
-                  keyboardType: TextInputType.text,
-                  maxLenght: 100,
                   hint: 'Dirección de vivienda',
                   onChange: (text) {
-                    location = text;
+                    setState(() {
+                      location = text;
+                    });
                   },
                 ),
                 SizedBox(height: 20),
@@ -185,7 +153,6 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 .toList(),
                             onChange: (value) {
                               setState(() {
-                                print(value.clinics);
                                 selectedEnterprise = value;
                               });
                             },
@@ -219,7 +186,8 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                     : Container(),
                 SizedBox(height: 20),
                 CustomButton(
-                    titleButton: 'Añadir', onPressed: () => addEmployee())
+                    titleButton: 'Añadir',
+                    onPressed: isLoading ? null : () => addEmployee())
               ],
             ),
           )
@@ -239,30 +207,53 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
   }
 
   void addEmployee() async {
-    var data = jsonEncode({
-      "name": name,
-      "lastname": lastname,
-      "email": email,
-      "password": password,
-      "dui": dui,
-      "direction": location,
-      "role": selectedRole,
-      "clinic": selectedClinic.id,
-      "enterprise": selectedEnterprise.id,
+    setState(() {
+      isLoading = true;
     });
-
-    var res = await staffService.addStaff(data);
-
-    if (res['success']) {
-      Navigator.popAndPushNamed(context, '/admin');
+    if (name.isEmpty ||
+        lastname.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        dui.isEmpty ||
+        location.isEmpty ||
+        selectedRole == null ||
+        selectedRole.isEmpty ||
+        selectedClinic == null ||
+        selectedEnterprise == null) {
+      setState(() {
+        isLoading = false;
+      });
+      return requestFields(
+          context,
+          Text('Error de ingreso'),
+          Text(
+              'Rellene todo el formulario y seleccione cada opción que se solicita'));
     } else {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text('No se puede agregar el staff'),
-            );
-          });
+      var data = jsonEncode({
+        "name": name,
+        "lastname": lastname,
+        "email": email,
+        "password": password,
+        "dui": dui,
+        "direction": location,
+        "role": selectedRole,
+        "clinic": selectedClinic.id,
+        "enterprise": selectedEnterprise.id,
+      });
+
+      var res = await staffService.addStaff(data);
+
+      if (res['success']) {
+        NavigatorUtil.navigateToAndClear(context, '/admin');
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                content: Text('No se puede agregar el staff'),
+              );
+            });
+      }
     }
   }
 }

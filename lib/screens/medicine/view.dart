@@ -76,7 +76,7 @@ class _ViewMedicineScreenState extends State<ViewMedicineScreen> {
                       role: provider.role,
                       enterpriseId: provider.enterpriseIdFrom,
                       medicineService: medicineService,
-                      idClinic: provider.enterprise.id,
+                      idClinic: provider.enterprise?.id,
                     ),
             )
           ],

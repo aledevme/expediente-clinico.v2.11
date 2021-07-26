@@ -405,7 +405,7 @@ class _AddDateScreenState extends State<AddDateScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(expedient.whyVisiting ?? "Sin motivo de visita"),
-                Text('18 años')
+                getAge(expedient)
               ],
             )
           ],

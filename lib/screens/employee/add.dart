@@ -175,7 +175,8 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 children: selectedEnterprise.clinics
                                     .map((Clinic clinic) => DropdownMenuItem(
                                         value: clinic,
-                                        child: Text(clinic.name)))
+                                        child: Text(clinic.name ??
+                                            "Sin nombre de clinica")))
                                     .toList(),
                                 onChange: (value) {
                                   setState(() {
